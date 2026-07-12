@@ -1,7 +1,7 @@
 from flask import request, jsonify
 from app import app, db, bcrypt
 from app.models import User, Book, Order
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
 @app.route("/")
 def home():
@@ -56,3 +56,34 @@ def login():
         "message": "Login successful",
         "access_token": access_token
     })
+
+@app.route("/books", methods=["GET"])
+def get_books():
+
+    books = Book.query.all()
+    books_list = [book.to_dict() for book in books]
+
+    return jsonify(books_list)
+
+@app.route("/books", methods=["POST"])
+@jwt_required()
+def create_book():
+
+    data = request.get_json()
+
+    title = data["title"]
+    author = data["author"]
+    price = data["price"]
+
+    new_book = Book(
+        title=title,
+        author=author,
+        price=price
+    )
+
+    db.session.add(new_book)
+    db.session.commit()
+
+    return jsonify({
+        "message": "Book created successfully"
+    }), 201

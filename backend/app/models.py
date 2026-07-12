@@ -25,6 +25,15 @@ class Book(db.Model):
         return f"<Book {self.title}>"
     
 
+    def to_dict(self):
+        return {
+            "id" : self.id,
+            "title":self.title,
+            "author":self.author,
+            "price":self.price
+        }
+    
+
 class Order(db.Model):
     __tablename__ = "orders"
 
