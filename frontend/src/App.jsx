@@ -6,14 +6,43 @@ import Dashboard from "./pages/Dashboard";
 import Books from "./pages/Books";
 import Orders from "./pages/Orders";
 
+import ProtectedRoute from "./components/ProtectedRoute";
+
 function App() {
   return (
     <Routes>
+
       <Route path="/" element={<Login />} />
+
       <Route path="/signup" element={<Signup />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/books" element={<Books />} />
-      <Route path="/orders" element={<Orders />} />
+
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/books"
+        element={
+          <ProtectedRoute>
+            <Books />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/orders"
+        element={
+          <ProtectedRoute>
+            <Orders />
+          </ProtectedRoute>
+        }
+      />
+
     </Routes>
   );
 }
