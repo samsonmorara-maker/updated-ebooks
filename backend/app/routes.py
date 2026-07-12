@@ -1,6 +1,7 @@
 from flask import request, jsonify
 from app import app, db, bcrypt
 from app.models import User, Book, Order
+from flask_jwt_extended import create_access_token
 
 @app.route("/")
 def home():
@@ -31,3 +32,27 @@ def signup():
     return jsonify({
         "message":"User created successfully"
     }),201
+
+
+@app.route("/login", methods=["POST"])
+def login():
+    data = request.get_json()
+    email = data["email"]
+    password = data["password"]
+
+    user = User.query.filter_by(email=email).first()
+    if not user:
+        return jsonify({
+            "message":"Invalid email or password"
+        }),401
+    
+    if not bcrypt.check_password_hash(user.password, password):
+        return jsonify({
+            "message":"Invalid email or password"
+        }),401
+    
+    access_token = create_access_token(identity=str(user.id))
+    return jsonify({
+        "message": "Login successful",
+        "access_token": access_token
+    })
