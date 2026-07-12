@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -10,21 +11,8 @@ export default function Dashboard() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-
-      <nav className="bg-blue-600 text-white p-4 flex justify-between">
-
-        <h1 className="text-2xl font-bold">
-          eBook Store
-        </h1>
-
-        <button
-          onClick={logout}
-          className="bg-red-500 px-4 py-2 rounded hover:bg-red-600"
-        >
-          Logout
-        </button>
-
-      </nav>
+        <Navbar />
+      
 
       <div className="max-w-5xl mx-auto mt-10">
 

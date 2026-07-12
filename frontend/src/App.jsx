@@ -5,7 +5,7 @@ import Signup from "./pages/Signup";
 import Dashboard from "./pages/Dashboard";
 import Books from "./pages/Books";
 import Orders from "./pages/Orders";
-
+import ManageBooks from "./pages/ManageBooks";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -42,7 +42,14 @@ function App() {
           </ProtectedRoute>
         }
       />
-
+      <Route
+            path="/manage-books"
+        element={
+         <ProtectedRoute>
+        <ManageBooks />
+        </ProtectedRoute>
+        }
+        />
     </Routes>
   );
 }

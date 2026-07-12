@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Navbar from "../components/Navbar";
 
 export default function Books() {
   const [books, setBooks] = useState([]);
@@ -46,7 +47,7 @@ export default function Books() {
 
   return (
     <div className="min-h-screen bg-gray-100">
-
+        <Navbar />
       <div className="max-w-6xl mx-auto p-8">
 
         <h1 className="text-4xl font-bold mb-8">
@@ -69,7 +70,7 @@ export default function Books() {
               </p>
 
               <p className="text-xl font-semibold mt-4">
-                ${book.price}
+                KSH {book.price}
               </p>
 
              <button

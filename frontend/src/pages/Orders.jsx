@@ -9,22 +9,29 @@ export default function Orders() {
   }, []);
 
   async function fetchOrders() {
-    const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
-    try {
-      const response = await fetch("http://127.0.0.1:5000/orders", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+  try {
+    const response = await fetch("http://127.0.0.1:5000/orders", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-      const data = await response.json();
-      setOrders(data);
+    const data = await response.json();
 
-    } catch (error) {
-      console.log(error);
+    if (!response.ok) {
+      console.log(data);
+      alert(data.msg || data.message);
+      return;
     }
+
+    setOrders(data);
+
+  } catch (error) {
+    console.log(error);
   }
+}
 
   return (
     <>
@@ -56,7 +63,7 @@ export default function Orders() {
                 </p>
 
                 <p className="text-green-600 font-bold mt-4">
-                  ${order.book.price}
+                  KSH {order.book.price}
                 </p>
 
                 <p className="mt-4 text-sm text-blue-600">
