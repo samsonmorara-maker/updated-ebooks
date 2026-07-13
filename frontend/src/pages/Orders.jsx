@@ -12,7 +12,7 @@ export default function Orders() {
   const token = localStorage.getItem("token");
 
   try {
-    const response = await fetch("http://127.0.0.1:5000/orders", {
+    const response = await fetch("https://updated-ebooks.onrender.com/orders", {
       headers: {
         Authorization: `Bearer ${token}`,
       },

@@ -16,7 +16,7 @@ export default function ManageBooks() {
 
   async function fetchBooks() {
     try {
-      const response = await fetch("http://127.0.0.1:5000/books");
+      const response = await fetch("https://updated-ebooks.onrender.com/books");
       const data = await response.json();
 
       if (response.ok) {
@@ -40,8 +40,8 @@ export default function ManageBooks() {
   const token = localStorage.getItem("token");
 
   const url = editingId
-    ? `http://127.0.0.1:5000/books/${editingId}`
-    : "http://127.0.0.1:5000/books";
+    ? `https://updated-ebooks.onrender.com/books/${editingId}`
+    : "https://updated-ebooks.onrender.com/books";
 
   const method = editingId ? "PUT" : "POST";
 
@@ -90,7 +90,7 @@ export default function ManageBooks() {
     if (!confirmDelete) return;
 
     try {
-      const response = await fetch(`http://127.0.0.1:5000/books/${id}`, {
+      const response = await fetch(`https://updated-ebooks.onrender.com/books/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
