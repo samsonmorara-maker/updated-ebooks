@@ -42,3 +42,7 @@ jwt.init_app(app)
 
 from app import models
 from app import routes
+from app import routes
+
+with app.app_context():
+    db.create_all()
