@@ -16,7 +16,12 @@ jwt = JWTManager()
 app = Flask(__name__, instance_relative_config=True)
 CORS(app)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///ebookstore.db"
+import os
+
+app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv(
+    "DATABASE_URL",
+    "sqlite:///ebookstore.db"
+)
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
     
